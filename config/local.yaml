@@ -1,6 +1,6 @@
 server:
   port: 8080
-database:
+databases:
   - user: admin
     password: admin
     host: localhost
@@ -12,3 +12,11 @@ database:
 security:
   jwt:
     key: abc123
+redis:
+  user: admin
+elasticsearch:
+  user: admin
+rabbitMQ:
+  user: admin
+kafka:
+  user: admin
