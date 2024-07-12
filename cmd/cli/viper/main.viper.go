@@ -15,7 +15,7 @@ type Config struct {
 		User     string `mapstructure:"user"`
 		Password string `mapstructure:"password"`
 		Host     string `mapstructure:"host"`
-	} `mapstructure:"databases"`
+	} `mapstructure:"mysql"`
 }
 
 func main() {

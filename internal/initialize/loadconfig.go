@@ -13,13 +13,13 @@ func LoadConfig() {
 	viper.SetConfigName("local")
 	viper.SetConfigType("yaml")
 
-	// err := viper.ReadInConfig()
-	// if err != nil {
-	// 	panic(fmt.Errorf("failed to read config: %w ", err))
-	// }
+	err := viper.ReadInConfig()
+	if err != nil {
+		panic(fmt.Errorf("failed to read config: %w ", err))
+	}
 	//read server configuration
 	fmt.Println("Server port::", viper.GetInt("server.port"))
-	fmt.Println("Security key::", viper.GetString("security.jwt.key"))
+	fmt.Println("db host::", viper.GetString("mysql.host"))
 
 	//configure structure
 	if err := viper.Unmarshal(&global.Config); err != nil {

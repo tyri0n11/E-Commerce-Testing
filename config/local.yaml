@@ -1,18 +1,20 @@
 server:
   port: 8080
+
 mysql:
   host: 127.0.0.1
-  port: 33306
+  port: 3306
   username: root
   password: admin
   dbname: muffin
   maxIdleConnections: 10
   maxOpenConnections: 100
   connMaxLifetime: 3600
+
 logger:
   log_level: debug
   file_log_name: "./storage/logs/dev.001.log"
-  maxSize: 500
-	maxBackups: 3
-	maxAge: 28
-	compress: true
+  maxBackups: 30
+  maxAge: 7
+  maxSize: 1024
+  compress: true

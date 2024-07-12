@@ -21,9 +21,9 @@ func checkError(err error, s string) {
 func InitMySQL() {
 	m := global.Config.Mysql
 
-	dsn := "%s:%s@tcp(%s:%v)/%s?charset=utf8mb4&parseTime=True&loc=local"
+	dsn := "%s:%s@tcp(%s:%v)/%s?charset=utf8mb4&parseTime=True&loc=UTC"
 	var s = fmt.Sprintf(dsn, m.User, m.Password, m.Host, m.Port, m.Database)
-
+	fmt.Print(m.Host, m.Port)
 	db, err := gorm.Open(mysql.Open(s), &gorm.Config{
 		SkipDefaultTransaction: false,
 	})
