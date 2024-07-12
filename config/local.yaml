@@ -1,22 +1,18 @@
 server:
   port: 8080
-databases:
-  - user: admin
-    password: admin
-    host: localhost
-    dbName: shopTao
-  - user: order
-    password: order
-    host: localhost
-    dbName: order
-security:
-  jwt:
-    key: abc123
-redis:
-  user: admin
-elasticsearch:
-  user: admin
-rabbitMQ:
-  user: admin
-kafka:
-  user: admin
+mysql:
+  host: 127.0.0.1
+  port: 33306
+  username: root
+  password: admin
+  dbname: muffin
+  maxIdleConnections: 10
+  maxOpenConnections: 100
+  connMaxLifetime: 3600
+logger:
+  log_level: debug
+  file_log_name: "./storage/logs/dev.001.log"
+  maxSize: 500
+	maxBackups: 3
+	maxAge: 28
+	compress: true
