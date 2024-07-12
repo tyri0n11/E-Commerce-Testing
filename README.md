@@ -1,1 +1,1 @@
-Libraries: Gin, Viper, Gormo, fmt
+Libraries: Gin, Viper, Gormo, fmt, google/uuid
