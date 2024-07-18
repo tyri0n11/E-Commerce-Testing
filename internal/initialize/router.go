@@ -1,53 +1,38 @@
 package initialize
 
 import (
-	"fmt"
-	"net/http"
-
 	"github.com/gin-gonic/gin"
-	c "github.com/tyri0n11/Muffin/internal/controllers"
+	"github.com/tyri0n11/Muffin/global"
+	"github.com/tyri0n11/Muffin/internal/routers"
 )
 
-func AA() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		fmt.Println("Before ---- AA")
-		c.Next()
-		fmt.Println("After ---- AA")
-	}
-
-}
-func BB() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		fmt.Println("Beffore ---- BB")
-		c.Next()
-		fmt.Println("After ---- BB")
-	}
-}
-func CC(c *gin.Context) {
-	fmt.Println("Beffore ---- CC")
-	c.Next()
-	fmt.Println("After ---- CC")
-}
-
 func InitRouter() *gin.Engine {
-
-	r := gin.Default()
-	//use middleware
-	r.Use(AA(), BB(), CC)
-	v1 := r.Group("/v1/2024")
-	{
-		v1.GET("/user/1", c.NewUserController().GetUserById)
-
+	var r *gin.Engine
+	if global.Config.Server.Mode == "dev" {
+		gin.SetMode(gin.DebugMode)
+		gin.ForceConsoleColor()
+		r = gin.Default()
+	} else {
+		gin.SetMode(gin.ReleaseMode)
+		r = gin.New()
 	}
+	r.Use() //logger
+	r.Use() //cross
+	r.Use() //limiter
+	managerRouter := routers.RouterGroup.Manager
+	userRouter := routers.RouterGroup.User
 
+	mainGroup := r.Group("/v1/2024")
+	{
+		mainGroup.GET("/checkStatus") //tracking monitor
+	}
+	{
+		userRouter.InitUserRouter(mainGroup)
+		userRouter.InitProductRouter(mainGroup)
+	}
+	{
+		managerRouter.InitAdminRouter(mainGroup)
+		managerRouter.InitUserRouter(mainGroup)
+	}
 	return r
-}
-func Pong(c *gin.Context) {
-	name := c.DefaultQuery("name", "Tyr1on")
-	uid := c.DefaultQuery("uid", "Tyr1on")
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Welcome to the server",
-		"name":    name,
-		"uid":     uid,
-	})
 }
