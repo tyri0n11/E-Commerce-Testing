@@ -9,3 +9,5 @@ type RouterGroup struct {
 	User    user.UserRouterGroup
 	Manager manage.ManageRouterGroup
 }
+
+var RouterGroupApp = new(RouterGroup)

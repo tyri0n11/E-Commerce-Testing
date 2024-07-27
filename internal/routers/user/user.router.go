@@ -9,12 +9,14 @@ func (pr *ProductRouter) InitUserRouter(Router *gin.RouterGroup) {
 	UserRouterPublic := Router.Group("/product")
 	{
 		UserRouterPublic.POST("/register")
-		UserRouterPublic.GET("/otp")
+		UserRouterPublic.POST("/otp")
 	}
 	//private routers
 	UserRouterPrivate := Router.Group("/product")
+	// UserRouterPrivate.Use(Limiter())
+	// UserRouterPrivate.Use(Authen())
+	// UserRouterPrivate.Use(Permission())
 	{
-		UserRouterPrivate.POST("/register")
-		UserRouterPrivate.GET("/otp")
+		UserRouterPrivate.GET("/get_info")
 	}
 }
