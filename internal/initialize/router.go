@@ -16,11 +16,11 @@ func InitRouter() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 		r = gin.New()
 	}
-	r.Use() //logger
-	r.Use() //cross
-	r.Use() //limiter
-	managerRouter := routers.RouterGroup.Manager
-	userRouter := routers.RouterGroup.User
+	// r.Use() //logger
+	// r.Use() //cross
+	// r.Use() //limiter
+	managerRouter := routers.RouterGroupApp.Manager
+	userRouter := routers.RouterGroupApp.User
 
 	mainGroup := r.Group("/v1/2024")
 	{

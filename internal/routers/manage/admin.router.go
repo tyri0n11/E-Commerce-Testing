@@ -4,7 +4,7 @@ import "github.com/gin-gonic/gin"
 
 type AdminRouter struct{}
 
-func (pr *AdminRouter) InitAdminRouter(Router *gin.RouterGroup) {
+func (ar *AdminRouter) InitAdminRouter(Router *gin.RouterGroup) {
 	//public routers
 	AdminRouterPublic := Router.Group("/admin")
 	{
